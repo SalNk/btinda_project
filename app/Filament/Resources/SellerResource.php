@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SellerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SellerResource\RelationManagers;
+use App\Filament\Resources\DeliveryManResource\RelationManagers\OrdersRelationManager;
 
 class SellerResource extends Resource
 {
@@ -119,9 +120,10 @@ class SellerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrdersRelationManager::class
         ];
     }
+
 
     public static function getPages(): array
     {

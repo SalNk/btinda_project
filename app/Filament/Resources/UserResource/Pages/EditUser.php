@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
+    protected ?string $heading = "Editer un utilisateur";
 
     protected function getHeaderActions(): array
     {
@@ -16,4 +17,15 @@ class EditUser extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    // protected function mutateFormDataBeforeSave(array $data): array
+    // {
+
+    //     dd($data);
+    //     if ($data['role'] == 'seller') {
+
+    //     }
+
+    //     return $data;
+    // }
 }
