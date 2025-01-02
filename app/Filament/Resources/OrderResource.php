@@ -74,11 +74,18 @@ class OrderResource extends Resource
                             ->relationship('seller', 'id')
                             ->getOptionLabelFromRecordUsing(fn($record) => $record->user->name ?? 'N/A')
                             ->columnSpanFull()
+                            ->query(function ($query) {
+                                $query->where('user', fn($q) => $q->where('is_active', true));
+                            })
                             ->default(fn() => optional(Auth::user()->seller)->id),
                         Select::make('delivery_man_id')
                             ->label('Livreur')
                             ->relationship('delivery_man', 'id')
                             ->getOptionLabelFromRecordUsing(fn($record) => $record->user->name ?? 'N/A')
+                            ->query(function ($query) {
+                                $query->where('is_available', true)
+                                    ->whereHas('user', fn($q) => $q->where('is_active', true));
+                            })
                             ->columnSpanFull(),
 
                     ]),
