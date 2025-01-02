@@ -42,6 +42,7 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 Section::make('Attribution')
+                    ->visible(Auth::user()->role === 'admin')
                     ->schema([
                         Select::make('seller_id')
                             ->label('Vendeur')
