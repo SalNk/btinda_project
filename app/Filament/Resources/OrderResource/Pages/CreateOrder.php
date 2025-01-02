@@ -9,7 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateOrder extends CreateRecord
 {
     protected static string $resource = OrderResource::class;
-    protected ?string $heading = 'Ajouter un bitinda';
+    protected ?string $heading = 'Ajouter un BTinda';
 
     // public function mutateFormDataBeforeCreate(array $data): array
     // {

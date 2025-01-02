@@ -20,9 +20,9 @@ class OrderOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Bitinda à faire', $this->getPageTableQuery()->where('status', 'new')->count()),
-            Stat::make('Bitinda en cours', $this->getPageTableQuery()->where('status', 'processing')->count()),
-            Stat::make('Bitinda effectués', $this->getPageTableQuery()->where('status', 'delivered')->count()),
+            Stat::make('BTinda à faire', $this->getPageTableQuery()->where('status', 'new')->count()),
+            Stat::make('BTinda en cours', $this->getPageTableQuery()->where('status', 'processing')->count()),
+            Stat::make('BTinda effectués', $this->getPageTableQuery()->where('status', 'delivered')->count()),
         ];
     }
 }

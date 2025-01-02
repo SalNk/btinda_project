@@ -26,10 +26,10 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
-    protected static ?string $navigationLabel = 'Bitinda';
-    protected static ?string $label = 'Bitinda';
+    protected static ?string $navigationLabel = 'BTinda';
+    protected static ?string $label = 'BTinda';
     protected static ?string $navigationIcon = 'carbon-order-details';
-    protected static ?string $navigationBadgeTooltip = 'Nouveaux Bitinda';
+    protected static ?string $navigationBadgeTooltip = 'Nouveaux BTinda';
     protected static ?int $navigationSort = 1;
 
     public static function shouldRegisterNavigation(): bool
@@ -47,7 +47,8 @@ class OrderResource extends Resource
                         Select::make('seller_id')
                             ->label('Vendeur')
                             ->relationship('seller.user', 'name')
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->default(fn() => optional(Auth::user()->seller)->id),
                         Select::make('delivery_man_id')
                             ->relationship('delivery_man.user', 'name')
                             ->label('Livreur')
@@ -83,7 +84,7 @@ class OrderResource extends Resource
                 Section::make('Images')
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('media')
-                            ->collection('bitinda-images')
+                            ->collection('BTinda-images')
                             ->multiple()
                             ->maxFiles(2)
                             ->hiddenLabel(),
@@ -101,9 +102,9 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('bitinda-images')
+                SpatieMediaLibraryImageColumn::make('BTinda-images')
                     ->label('Images')
-                    ->collection('bitinda-images'),
+                    ->collection('BTinda-images'),
                 TextColumn::make('seller.user.name')
                     ->label('Vendeur')
                     ->sortable()

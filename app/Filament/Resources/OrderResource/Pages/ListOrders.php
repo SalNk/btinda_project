@@ -14,7 +14,7 @@ class ListOrders extends ListRecords
     use ExposesTableToWidgets;
 
     protected static string $resource = OrderResource::class;
-    protected ?string $heading = 'Liste des Bitinda';
+    protected ?string $heading = 'Liste des BTinda';
 
     protected function getHeaderActions(): array
     {

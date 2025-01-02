@@ -14,7 +14,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 class OrdersRelationManager extends RelationManager
 {
     protected static string $relationship = 'orders';
-    protected static ?string $title = 'Le(s) Bitinda du vendeur';
+    protected static ?string $title = 'Le(s) BTinda du vendeur';
 
     public function form(Form $form): Form
     {

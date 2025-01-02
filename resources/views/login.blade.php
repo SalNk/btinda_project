@@ -17,14 +17,14 @@
             <div
                 class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
                 <div class="absolute inset-0">
-                    <img class="object-cover object-top w-full h-full" src="{{ asset('images/girl-thinking.jpg') }}"
+                    <img class="object-cover object-top w-full h-full" src="{{ asset('images/login.jpg') }}"
                         alt="" />
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
                 <div class="relative">
                     <div class="w-full max-w-xl xl:w-full xl:mx-auto xl:pr-24 xl:max-w-xl">
-                        <h3 class="text-4xl font-bold text-white">Rejoignez la communauté de Bitinda Nayo et facilitez
+                        <h3 class="text-4xl font-bold text-white">Rejoignez la communauté de BTinda Nayo et facilitez
                             vos livraisons en toute simplicité !</h3>
                         <ul class="grid grid-cols-1 mt-10 sm:grid-cols-2 gap-x-8 gap-y-4">
                             <li class="flex items-center space-x-3">
