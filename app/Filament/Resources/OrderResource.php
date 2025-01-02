@@ -8,6 +8,7 @@ use App\Models\Order;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -26,9 +27,15 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
     protected static ?string $navigationLabel = 'Bitinda';
+    protected static ?string $label = 'Bitinda';
     protected static ?string $navigationIcon = 'carbon-order-details';
     protected static ?string $navigationBadgeTooltip = 'Nouveaux Bitinda';
     protected static ?int $navigationSort = 1;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()->role === 'seller' || Auth::user()->role === 'admin';
+    }
 
     public static function form(Form $form): Form
     {

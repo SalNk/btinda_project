@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditSeller extends EditRecord
 {
     protected static string $resource = SellerResource::class;
+    protected ?string $heading = "Modifier le vendeur";
 
     protected function getHeaderActions(): array
     {

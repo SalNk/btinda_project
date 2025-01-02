@@ -8,6 +8,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\DeliveryMan;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
@@ -17,13 +18,20 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\DeliveryManResource\Pages;
 use App\Filament\Resources\DeliveryManResource\RelationManagers;
+use App\Filament\Resources\DeliveryManResource\RelationManagers\OrdersRelationManager;
 
 class DeliveryManResource extends Resource
 {
     protected static ?string $model = DeliveryMan::class;
     protected static ?string $navigationIcon = 'carbon-delivery';
     protected static ?string $navigationLabel = 'Livreurs';
+    protected static ?string $label = 'Livreurs';
     protected static ?int $navigationSort = 3;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()->role === 'delivery_man' || Auth::user()->role === 'admin';
+    }
 
     public static function form(Form $form): Form
     {
@@ -120,7 +128,7 @@ class DeliveryManResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrdersRelationManager::class
         ];
     }
 

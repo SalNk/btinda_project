@@ -9,4 +9,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSeller extends CreateRecord
 {
     protected static string $resource = SellerResource::class;
+    protected ?string $heading = "Ajouter un vendeur";
 }

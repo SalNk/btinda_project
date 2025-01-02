@@ -8,6 +8,7 @@ use App\Models\Delivery;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\DeliveryResource\Pages;
@@ -18,6 +19,7 @@ class DeliveryResource extends Resource
 {
     protected static ?string $model = Delivery::class;
     protected static ?string $navigationLabel = 'Livraisons';
+    protected static ?string $label = 'Livraisons';
     protected static ?string $navigationIcon = 'carbon-delivery-parcel';
     protected static ?int $navigationSort = 4;
 

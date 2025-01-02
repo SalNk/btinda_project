@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Resources\Pages\Page;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
@@ -28,6 +29,12 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Gestion d\'utilisateurs';
     protected static ?string $navigationLabel = 'Utilisateurs';
+    protected static ?string $label = 'Utilisateurs';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
 
     public static function form(Form $form): Form
     {

@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListDeliveryMen extends ListRecords
 {
     protected static string $resource = DeliveryManResource::class;
+    protected ?string $heading = "Liste des livreurs";
 
     protected function getHeaderActions(): array
     {

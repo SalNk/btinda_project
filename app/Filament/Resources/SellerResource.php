@@ -8,6 +8,7 @@ use App\Models\Seller;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
@@ -17,14 +18,20 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SellerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SellerResource\RelationManagers;
-use App\Filament\Resources\DeliveryManResource\RelationManagers\OrdersRelationManager;
+use App\Filament\Resources\SellerResource\RelationManagers\OrdersRelationManager;
 
 class SellerResource extends Resource
 {
     protected static ?string $model = Seller::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
     protected static ?string $navigationLabel = 'Vendeurs';
+    protected static ?string $label = 'Vendeurs';
     protected static ?int $navigationSort = 2;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()->role === 'seller' || Auth::user()->role === 'admin';
+    }
 
     public static function form(Form $form): Form
     {

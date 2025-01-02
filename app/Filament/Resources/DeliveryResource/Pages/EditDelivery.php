@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditDelivery extends EditRecord
 {
     protected static string $resource = DeliveryResource::class;
+    protected ?string $heading = "Editer une livraison";
 
     protected function getHeaderActions(): array
     {
