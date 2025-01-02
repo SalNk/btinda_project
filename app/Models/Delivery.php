@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Delivery
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Delivery extends Model
 {
+	use HasFactory;
 	protected $table = 'deliveries';
 
 	protected $casts = [

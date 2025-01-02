@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use App\Filament\Resources\OrderResource;
+use App\Models\Order;
 use Filament\Actions;
+use App\Filament\Resources\OrderResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateOrder extends CreateRecord
@@ -13,7 +14,7 @@ class CreateOrder extends CreateRecord
 
     // public function mutateFormDataBeforeCreate(array $data): array
     // {
-    //     dd($data);
+    //     dd(Order::create($data));
     // }
 
 }

@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon $delivery_date
  * @property float $item_price
  * @property string $notes
- * @property string|null $description
  * @property string $status
  * @property int $seller_id
  * @property int|null $delivery_man_id
@@ -61,7 +60,6 @@ class Order extends Model implements HasMedia
 		'delivery_date',
 		'item_price',
 		'notes',
-		'description',
 		'status',
 		'seller_id',
 		'delivery_man_id'
@@ -81,4 +79,11 @@ class Order extends Model implements HasMedia
 	{
 		return $this->hasMany(Delivery::class);
 	}
+
+	// protected static function booted()
+	// {
+	// 	static::saving(callback: function ($order) {
+	// 		dd($order);
+	// 	});
+	// }
 }

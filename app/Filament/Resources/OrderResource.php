@@ -32,9 +32,34 @@ class OrderResource extends Resource
     protected static ?string $navigationBadgeTooltip = 'Nouveaux BTinda';
     protected static ?int $navigationSort = 1;
 
-    public static function shouldRegisterNavigation(): bool
+    public static function getEloquentQuery(): Builder
     {
-        return Auth::user()->role === 'seller' || Auth::user()->role === 'admin';
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
+
+        // Si l'utilisateur est un "seller", on filtre les deliveries associées à ce seller
+        if ($userRole === 'seller') {
+            return static::getModel()::query()
+                ->whereHas('seller', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                });
+        }
+
+        // Si l'utilisateur est un "delivery man", on filtre les deliveries associées à ce delivery man
+        if ($userRole === 'delivery_man') {
+            return static::getModel()::query()
+                ->whereHas('delivery_man', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                });
+        }
+
+        // Si l'utilisateur est un "admin", on affiche toutes les deliveries
+        if ($userRole === 'admin') {
+            return static::getModel()::query();
+        }
+
+        // Par défaut, ne retourner aucun enregistrement
+        return static::getModel()::query()->whereRaw('1 = 0');
     }
 
     public static function form(Form $form): Form
@@ -46,13 +71,16 @@ class OrderResource extends Resource
                     ->schema([
                         Select::make('seller_id')
                             ->label('Vendeur')
-                            ->relationship('seller.user', 'name')
+                            ->relationship('seller', 'id')
+                            ->getOptionLabelFromRecordUsing(fn($record) => $record->user->name ?? 'N/A')
                             ->columnSpanFull()
                             ->default(fn() => optional(Auth::user()->seller)->id),
                         Select::make('delivery_man_id')
-                            ->relationship('delivery_man.user', 'name')
                             ->label('Livreur')
+                            ->relationship('delivery_man', 'id')
+                            ->getOptionLabelFromRecordUsing(fn($record) => $record->user->name ?? 'N/A')
                             ->columnSpanFull(),
+
                     ]),
                 Section::make('Détail de la livraison')
                     ->columns(2)

@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->date('delivery_date')->default('2000-01-01');
             $table->decimal('item_price');
             $table->string('notes');
-            $table->longText('description')->nullable();
             $table->enum('status', ['new', 'processing', 'delivered', 'cancelled'])->default('new');
             $table->foreignId('seller_id')->constrained('sellers')->cascadeOnDelete();
             $table->foreignId('delivery_man_id')->nullable()->constrained('delivery_men')->nullOnDelete();
