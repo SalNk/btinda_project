@@ -8,12 +8,14 @@ use App\Models\Order;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Resources\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
 use Illuminate\Database\Eloquent\Builder;
@@ -88,20 +90,26 @@ class OrderResource extends Resource
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->label('Produit'),
+                            ->label('Produit')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         TextInput::make('item_price')
                             ->label('Prix du produit')
                             ->columnSpan(1)
-                            ->suffix('$'),
+                            ->suffix('Fc')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         TextInput::make('delivery_price')
                             ->label('Frais de livraison')
-                            ->suffix('$'),
+                            ->suffix('Fc')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         TextInput::make('delivery_address')
-                            ->label('Adresse de livraison'),
+                            ->label('Adresse de livraison')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         DatePicker::make('delivery_date')
-                            ->label('Date de la livraison'),
+                            ->label('Date de la livraison')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         TimePicker::make('delivery_time')
-                            ->label('Heure de la livraison'),
+                            ->label('Heure de la livraison')
+                            ->disabled(fn(Page $livewire): bool => $livewire instanceof EditRecord),
                         Select::make('status')
                             ->label('Statut')
                             ->options([
