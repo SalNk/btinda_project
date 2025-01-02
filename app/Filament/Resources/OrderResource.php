@@ -45,10 +45,10 @@ class OrderResource extends Resource
                     ->schema([
                         Select::make('seller_id')
                             ->label('Vendeur')
-                            ->relationship('seller', 'id')
+                            ->relationship('seller.user', 'name')
                             ->columnSpanFull(),
                         Select::make('delivery_man_id')
-                            ->relationship('delivery_man', 'id')
+                            ->relationship('delivery_man.user', 'name')
                             ->label('Livreur')
                             ->columnSpanFull(),
                     ]),

@@ -19,13 +19,13 @@ class CreateUser extends CreateRecord
         $user = static::getModel()::create($data);
 
         if ($user['role'] == 'seller') {
-            $seller = Seller::create([
+            Seller::create([
                 'user_id' => $user->id,
                 'shop_name' => $data['shop_name'],
                 'shop_address' => $data['shop_address'],
             ]);
         } else if ($user['role'] == 'delivery_man') {
-            $delivery = DeliveryMan::create([
+            DeliveryMan::create([
                 'user_id' => $user->id,
                 'is_available' => 1,
             ]);

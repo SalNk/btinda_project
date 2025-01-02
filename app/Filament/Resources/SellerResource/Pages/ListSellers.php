@@ -14,11 +14,9 @@ class ListSellers extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return Auth::user()->role === 'admin'
-            ? [
-                Actions\CreateAction::make(),
-            ]
-            : [];
+        return [
+            // 
+        ];
     }
 
 }

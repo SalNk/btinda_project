@@ -33,6 +33,17 @@ class DeliveryManResource extends Resource
         return Auth::user()->role === 'delivery_man' || Auth::user()->role === 'admin';
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        if (Auth::user()->role === 'delivery_man') {
+            return static::getModel()::query()->where('user_id', Auth::id());
+        } elseif (Auth::user()->role === 'admin') {
+            return static::getModel()::query();
+        } else {
+            return static::getModel()::query()->where('id', 0);
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form

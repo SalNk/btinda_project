@@ -23,6 +23,36 @@ class DeliveryResource extends Resource
     protected static ?string $navigationIcon = 'carbon-delivery-parcel';
     protected static ?int $navigationSort = 4;
 
+    public static function getEloquentQuery(): Builder
+    {
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
+
+        // Si l'utilisateur est un "seller", on filtre les deliveries associées à ce seller
+        if ($userRole === 'seller') {
+            return static::getModel()::query()
+                ->whereHas('seller', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                });
+        }
+
+        // Si l'utilisateur est un "delivery man", on filtre les deliveries associées à ce delivery man
+        if ($userRole === 'delivery_man') {
+            return static::getModel()::query()
+                ->whereHas('delivery_man', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                });
+        }
+
+        // Si l'utilisateur est un "admin", on affiche toutes les deliveries
+        if ($userRole === 'admin') {
+            return static::getModel()::query();
+        }
+
+        // Par défaut, ne retourner aucun enregistrement
+        return static::getModel()::query()->whereRaw('1 = 0');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
