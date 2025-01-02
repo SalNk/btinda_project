@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use App\Filament\Resources\OrderResource\Widgets\OrderOverview;
 use Filament\Actions;
-use Filament\Pages\Concerns\ExposesTableToWidgets;
+use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Components\Tab;
 use App\Filament\Resources\OrderResource;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Pages\Concerns\ExposesTableToWidgets;
+use App\Filament\Resources\OrderResource\Widgets\OrderOverview;
 
 class ListOrders extends ListRecords
 {
@@ -18,9 +19,13 @@ class ListOrders extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        if (Auth::user()->role === 'delivery_man') {
+            return [];
+        }
         return [
             Actions\CreateAction::make(),
         ];
+
     }
 
     public function getTabs(): array
