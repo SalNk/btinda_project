@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'delivery_price' => fake()->randomFloat(2, 5, 50),
             'item_price' => fake()->randomFloat(2, 10, 500),
             'notes' => fake()->sentence(),
-            'description' => fake()->paragraph(),
+            // 'description' => fake()->paragraph(),
             'status' => fake()->randomElement(['new', 'processing', 'delivered', 'cancelled']),
             'seller_id' => Seller::all()->random()->id,
             'delivery_man_id' => DeliveryMan::all()->random()->id,
